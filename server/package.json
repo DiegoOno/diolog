@@ -1,0 +1,13 @@
+{
+  "name": "diolog-backend",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "tsx": "^4.9.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2"
+  }
+}

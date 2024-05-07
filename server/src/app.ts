@@ -1,4 +1,4 @@
-import { startServer } from './lib/lib';
+import { startServer } from "./lib/lib";
 
 const server = startServer();
-server.listen({ port: process.env.NODE_ENV_SERVER_PORT || 3000 });
+server.listen({ port: parseInt(process?.env?.NODE_ENV_SERVER_PORT || "3000") });

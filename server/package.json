@@ -11,7 +11,8 @@
   "dependencies": {
     "@fastify/env": "^4.3.0",
     "dotenv": "^16.4.5",
-    "fastify": "^4.26.2"
+    "fastify": "^4.26.2",
+    "prisma": "^5.14.0"
   },
   "scripts": {
     "dev": "tsx watch src/app.ts"

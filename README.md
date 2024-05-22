@@ -1,5 +1,5 @@
 # Diolog
-## Stop time, start chatting. Welcome to Diolog! ZA WARUDO!
+## ZA WARUDO!! Stop time! Start chatting... Welcome to DIOlog!
 ```mermaid
 erDiagram
     USER {

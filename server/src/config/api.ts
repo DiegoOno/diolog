@@ -13,7 +13,7 @@ export const startServer = () => {
     properties: {
       PORT: {
         type: 'string',
-        default: 3000
+        default: process.env.NODE_ENV_SERVER_PORT || 8080,
       },
     },
   };

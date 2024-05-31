@@ -18,4 +18,7 @@ model User {
   name      String    @db.VarChar(50)
   birthday  DateTime  @db.Date
   nickName  String    @db.VarChar(25)
+  createdAt DateTime  @default(now())
+  password  String    @db.VarChar(100)
+  email     String    @db.VarChar(100)
 }

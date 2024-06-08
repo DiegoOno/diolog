@@ -15,9 +15,10 @@ datasource db {
 
 model User {
   id        String    @id @default(uuid())
-  username  String    @unique
-  email     String    @unique
-  password  String
+  name      String    @db.VarChar(50)
+  birthday  DateTime  @db.Date
+  nickName  String    @db.VarChar(25)
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  password  String    @db.VarChar(100)
+  email     String    @db.VarChar(100)
 }

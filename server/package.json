@@ -4,15 +4,20 @@
   "main": "server.ts",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.10",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5"
   },
   "dependencies": {
     "@fastify/env": "^4.3.0",
+    "@fastify/jwt": "8.0.1",
+    "@prisma/client": "5.14.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
-    "prisma": "^5.14.0"
+    "prisma": "5.14.0",
+    "zod": "^3.23.8"
   },
   "scripts": {
     "dev": "tsx watch src/app.ts"

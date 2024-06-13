@@ -1,15 +1,15 @@
 import * as UserService from "../service/userService";
 import * as UserValidation from "../validation/userValidation";
 
-export const createUser = async (req: any, res: any) => {
+export const createUser = async (req: any) => {
   const user = req.body;
   try {
     UserValidation.createUserSchema.parse(user);
   } catch (error) {
-    res.status(400).json(error);
+    return JSON.stringify(error);
   }
   const createdUser = await UserService.createUserService(user);
-  res.status(200).json(createdUser);
+  return JSON.stringify(createdUser);
 };
 
 export const updateUser = async (req: any, res: any) => {
@@ -24,8 +24,13 @@ export const updateUser = async (req: any, res: any) => {
   res.status(200).json(updatedUser);
 };
 
-export const getUserById = async (req: any, res: any) => {
+export const getUserById = async (req: any) => {
   const id = req.params.id;
   const user = await UserService.getUserByIdService(id);
-  res.status(200).json(user);
+  return JSON.stringify(user);
 };
+
+export const getAllUsers = async () => {
+  const users = await UserService.getAllUsersService();
+  return users;
+}

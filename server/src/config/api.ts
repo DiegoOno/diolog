@@ -27,7 +27,7 @@ export const startServer = () => {
     properties: {
       PORT: {
         type: "string",
-        default: process.env.NODE_ENV_SERVER_PORT || 3030,
+        default: process.env.SERVER_PORT as string,
       },
     },
   };

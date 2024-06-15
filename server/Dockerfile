@@ -17,7 +17,7 @@ COPY .env ./
 COPY . .
 
 # Expose port
-EXPOSE 3030
+EXPOSE 8080
 
 # Command to run the application
 CMD ["npm", "start"]

@@ -1,54 +1,32 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3030:3030"
+      - "8000:8000"
     volumes:
       - .:/usr/src/app
     environment:
-      NODE_ENV: development
+      NODE_ENV: ${NODE_ENV}
       PGHOST: db
-      PGUSER: dio-brando
-      PGPASSWORD: zawarudo369
+      PGUSER: ${DB_USERNAME}
+      PGPASSWORD: ${DB_PASSWORD}
       PGDATABASE: diolog-db
+      PGPORT: 5432
     depends_on:
       - db
-      - keycloak
 
   db:
     image: postgres
     environment:
-      POSTGRES_USER: dio-brando
-      POSTGRES_PASSWORD: zawarudo369
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: diolog-db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  keycloak:
-    image: quay.io/keycloak/keycloak:latest
-    ports:
-      - "8080:8080"
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: db
-      DB_DATABASE: diolog-db
-      DB_USER: dio-brando
-      DB_PASSWORD: zawarudo369
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      PROXY_ADDRESS_FORWARDING: "true"
-    depends_on:
-      - db
-    volumes:
-      - keycloak-data:/opt/keycloak/data
-    command: ["start-dev"]
-
 volumes:
   postgres-data:
-  keycloak-data:

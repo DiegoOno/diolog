@@ -1,10 +1,12 @@
+version: '3.8'
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3030:3030"
     volumes:
       - .:/usr/src/app
     environment:
@@ -15,8 +17,8 @@ services:
       PGDATABASE: diolog-db
     depends_on:
       - db
-    networks:
-      - my-network
+      - keycloak
+
   db:
     image: postgres
     environment:
@@ -27,11 +29,26 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - my-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - "8080:8080"
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: db
+      DB_DATABASE: diolog-db
+      DB_USER: dio-brando
+      DB_PASSWORD: zawarudo369
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      PROXY_ADDRESS_FORWARDING: "true"
+    depends_on:
+      - db
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+    command: ["start-dev"]
+
 volumes:
   postgres-data:
-
-networks:
-  my-network:
-    driver: ipvlan
+  keycloak-data:

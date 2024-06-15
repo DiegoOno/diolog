@@ -1,5 +1,6 @@
 import "dotenv/config";
 import Fastify from "fastify";
+import cors from "@fastify/cors"
 import fastifyEnv from "@fastify/env";
 import mercurius from "mercurius";
 
@@ -12,13 +13,21 @@ export const startServer = () => {
     logger: true,
   });
 
+  fastify.register(cors, {
+    origin: '*', // Allow all origins
+    methods: ['GET', 'PUT', 'POST'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    exposedHeaders: ['Content-Range', 'X-Content-Range'], // Headers exposed to the client
+    maxAge: 86400 
+  });
+
   const configSchema = {
     type: "object",
     required: ["PORT"],
     properties: {
       PORT: {
         type: "string",
-        default: process.env.NODE_ENV_SERVER_PORT || 8080,
+        default: process.env.NODE_ENV_SERVER_PORT || 3030,
       },
     },
   };

@@ -1,7 +1,7 @@
 import { userTypeDefs } from './userSchema';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { TimestampTypeDefinition } from 'graphql-scalars';
+import { TimestampTypeDefinition, LocalDateTypeDefinition } from 'graphql-scalars';
 
 export const schema = makeExecutableSchema({
-  typeDefs: [TimestampTypeDefinition, userTypeDefs],
+  typeDefs: [TimestampTypeDefinition, LocalDateTypeDefinition, userTypeDefs],
 })

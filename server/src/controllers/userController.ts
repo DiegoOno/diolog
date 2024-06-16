@@ -1,15 +1,22 @@
+import bcrypt from "bcryptjs";
+
+import { IUserInput } from '../Interface/IUser';
 import * as UserService from "../service/userService";
 import * as UserValidation from "../validation/userValidation";
 
-export const createUser = async (req: any) => {
-  const user = req.body;
+export const createUser = async (user: IUserInput) => {
   try {
     UserValidation.createUserSchema.parse(user);
   } catch (error) {
     return JSON.stringify(error);
   }
+
+  const hashedPassword = await bcrypt.hash(user.password, 10);
+  user.password = hashedPassword;
+  user.birthday = new Date(user.birthday);
+
   const createdUser = await UserService.createUserService(user);
-  return JSON.stringify(createdUser);
+  return createdUser;
 };
 
 export const updateUser = async (req: any, res: any) => {

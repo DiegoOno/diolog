@@ -1,3 +1,4 @@
+import { IUserInput } from '../Interface/IUser';
 import prisma from "../config/db";
 
 export const getUserById = async (id: string) => {
@@ -12,7 +13,7 @@ export const getUsers = async () => {
   return await prisma.user.findMany();
 }
 
-export const createUser = async (user: any) => {
+export const createUser = async (user: IUserInput) => {
   return await prisma.user.create({
     data: user
   });

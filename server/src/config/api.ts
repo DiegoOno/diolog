@@ -1,5 +1,6 @@
 import "dotenv/config";
 import Fastify from "fastify";
+import { fastifyJwt } from '@fastify/jwt';
 import cors from "@fastify/cors"
 import fastifyEnv from "@fastify/env";
 import mercurius from "mercurius";
@@ -16,9 +17,10 @@ export const startServer = () => {
   fastify.register(cors, {
     origin: '*', // Allow all origins
     methods: ['GET', 'PUT', 'POST'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    exposedHeaders: ['Content-Range', 'X-Content-Range'], // Headers exposed to the client
-    maxAge: 86400 
+  });
+
+  fastify.register(fastifyJwt, {
+    secret: process.env.JWT_SECRET_KEY as string,
   });
 
   const configSchema = {

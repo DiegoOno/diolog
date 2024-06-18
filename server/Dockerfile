@@ -16,8 +16,11 @@ COPY .env ./
 # Copy the rest of the application code
 COPY . .
 
+# Make the entrypoint script executable
+RUN chmod +x /usr/src/app/entrypoint.sh
+
 # Expose port
 EXPOSE 8000
 
-# Command to run the application
-CMD ["npm", "start"]
+# Define the entrypoint script to run
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

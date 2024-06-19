@@ -8,6 +8,7 @@ import mercurius from "mercurius";
 import { schema } from "../schemas";
 import { resolvers } from "../resolvers";
 import prisma from "./db";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 export const startServer = () => {
   const fastify = Fastify({
@@ -22,6 +23,10 @@ export const startServer = () => {
   fastify.register(fastifyJwt, {
     secret: process.env.JWT_SECRET_KEY as string,
   });
+
+  fastify.addHook('preHandler', async (request, reply) => {
+    authMiddleware(request, reply, fastify)
+  })
 
   const configSchema = {
     type: "object",

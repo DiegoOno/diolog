@@ -4,11 +4,20 @@ import bcrypt from "bcryptjs";
 export const authenticateUser = async (email: string, password: string) => {
   const user = await userRepository.getUserByEmail(email);
   if (!user) {
-    return null;
+    throw new Error("User not found");
   }
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return null;
+    throw new Error("Invalid password");
   }
-  return user;
+
+  const { name, birthday, nickName, id } = user;
+
+  return {
+    name,
+    email,
+    birthday,
+    nickName,
+    id
+  };
 }
